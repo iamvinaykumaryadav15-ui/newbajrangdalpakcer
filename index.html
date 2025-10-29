@@ -158,7 +158,8 @@
                         <!-- Updated placeholder with new company name and color scheme -->
                         <img src="Screenshot 2025-10-09 142907.png"
                              alt="New Bajrang Packers & Movers professional moving services" 
-                             class="w-full h-auto object-cover rounded-3xl transition duration-500 hover:scale-105">
+                             class="w-full h-auto object-cover rounded-3xl transition duration-500 hover:scale-105"
+                             onerror="this.src='https://placehold.co/600x400/1e293b/F97316?text=New+Bajrang+Packers+\n(Image+Loading...)'">
                     </div>
                 </div>
             </div>
@@ -381,14 +382,16 @@
                     <i data-lucide="globe" class="w-4 h-4 inline mr-3 text-accent"></i> www.newbajrangpackers.in
                 </a>
                 
+                <!-- UPDATED ADDRESS -->
                 <p class="flex items-start pt-2">
                     <i data-lucide="map-pin" class="w-4 h-4 inline mr-3 text-accent flex-shrink-0 mt-1"></i>
-                    <span class="text-left">B.O.: Vikas Khand 4 Gwari Chauraha Near Pradhan Aata Chakki Gomti Nagar, Lucknow - 226010</span>
+                    <span class="text-left">B.O.: mmd1 /105 lda colony kanpur road lucknow. 226012</span>
                 </p>
 
+                <!-- UPDATED GSTIN -->
                 <p class="flex items-center pt-2">
                     <i data-lucide="file-text" class="w-4 h-4 inline mr-3 text-accent"></i>
-                    <span>GSTIN: 09AYKPK1399N3ZJ</span>
+                    <span>GSTIN: 09BSAPS0514E1Z2</span>
                 </p>
             </div>
         </div>
@@ -422,6 +425,7 @@
             let isDeleting = false;
 
             function typeWriter() {
+                if (!textElement) return; // Stop if element doesn't exist
                 const currentPhrase = phrases[phraseIndex];
 
                 if (isDeleting) {
@@ -458,57 +462,59 @@
             const form = document.getElementById('quoteForm');
             const messageBox = document.getElementById('messageBox');
 
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
 
-                // Simple client-side validation check
-                const name = document.getElementById('clientName').value.trim();
-                if (!name) {
-                    messageBox.className = 'p-3 bg-red-100 text-red-800 rounded-lg font-medium';
-                    messageBox.textContent = 'Please fill out your full name to proceed with the quote.';
+                    // Simple client-side validation check
+                    const name = document.getElementById('clientName').value.trim();
+                    if (!name) {
+                        messageBox.className = 'p-3 bg-red-100 text-red-800 rounded-lg font-medium';
+                        messageBox.textContent = 'Please fill out your full name to proceed with the quote.';
+                        messageBox.classList.remove('hidden');
+                        return;
+                    }
+
+                    // Simulate form submission success
+                    const formData = new FormData(form);
+                    console.log("Quote Request Submitted:", Object.fromEntries(formData.entries()));
+
+                    // Show success message (Updated Company Name)
+                    messageBox.className = 'p-3 bg-green-100 text-green-800 rounded-lg font-medium';
+                    messageBox.textContent = 'Success! Your free quote request has been received. A New Bajrang Packers & Movers expert will contact you within 2 hours.';
                     messageBox.classList.remove('hidden');
-                    return;
-                }
 
-                // Simulate form submission success
-                const formData = new FormData(form);
-                console.log("Quote Request Submitted:", Object.fromEntries(formData.entries()));
+                    // Clear form fields
+                    form.reset();
 
-                // Show success message (Updated Company Name)
-                messageBox.className = 'p-3 bg-green-100 text-green-800 rounded-lg font-medium';
-                messageBox.textContent = 'Success! Your free quote request has been received. A New Bajrang Packers & Movers expert will contact you within 2 hours.';
-                messageBox.classList.remove('hidden');
-
-                // Clear form fields
-                form.reset();
-
-                // Hide message after a few seconds
-                setTimeout(() => {
-                    messageBox.classList.add('hidden');
-                }, 7000);
-            });
+                    // Hide message after a few seconds
+                    setTimeout(() => {
+                        messageBox.classList.add('hidden');
+                    }, 7000);
+                });
+            }
 
 
             // 4. Mobile Menu Toggle Logic
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
 
             // Close menu when clicking outside (simple check)
             document.querySelectorAll('#mobile-menu a').forEach(item => {
                 item.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
+                    if (mobileMenu) {
+                        mobileMenu.classList.add('hidden');
+                    }
                 });
             });
         });
     </script>
 </body>
 </html>
-
-
-
-
-
